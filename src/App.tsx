@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import  getAPI  from './API';
+import Input from './components/Input'
 
 const App: React.FC = () => {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<any>([]);
   const [error, setError] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -21,10 +22,13 @@ const App: React.FC = () => {
     fetchData();
   }, []);
 
+  console.log('Current Data:', data);
+  console.log("what", data)
+
   return (
     <>
     what
-      <div>
+      {/* <div>
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error.message || 'Something went wrong!'}</p>}
         {data && (
@@ -33,7 +37,9 @@ const App: React.FC = () => {
             <pre>{JSON.stringify(data, null, 2)}</pre>
           </div>
         )}
-      </div>
+      </div> */}
+      {data.length > 0 && data[0].word && <Input word={data[0].word} />}
+     {/* <Input word={data[0].word} /> */}
     </>
   )
 }
