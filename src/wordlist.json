@@ -1,0 +1,402 @@
+[
+    {
+        "id": "1",
+        "word": "abandon"
+    },
+    {
+        "id": "2",
+        "word": "absolve"
+    },
+    {
+        "id": "3",
+        "word": "acquire"
+    },
+    {
+        "id": "4",
+        "word": "adjust"
+    },
+    {
+        "id": "5",
+        "word": "advice"
+    },
+    {
+        "id": "6",
+        "word": "affable"
+    },
+    {
+        "id": "7",
+        "word": "allergy"
+    },
+    {
+        "id": "8",
+        "word": "amplify"
+    },
+    {
+        "id": "9",
+        "word": "anomaly"
+    },
+    {
+        "id": "10",
+        "word": "appease"
+    },
+    {
+        "id": "11",
+        "word": "assert"
+    },
+    {
+        "id": "12",
+        "word": "bizarre"
+    },
+    {
+        "id": "13",
+        "word": "bless"
+    },
+    {
+        "id": "14",
+        "word": "boister"
+    },
+    {
+        "id": "15",
+        "word": "brevity"
+    },
+    {
+        "id": "16",
+        "word": "caliber"
+    },
+    {
+        "id": "17",
+        "word": "captive"
+    },
+    {
+        "id": "18",
+        "word": "chronic"
+    },
+    {
+        "id": "19",
+        "word": "climate"
+    },
+    {
+        "id": "20",
+        "word": "clumsy"
+    },
+    {
+        "id": "21",
+        "word": "coerce"
+    },
+    {
+        "id": "22",
+        "word": "conquer"
+    },
+    {
+        "id": "23",
+        "word": "corrupt"
+    },
+    {
+        "id": "24",
+        "word": "distant"
+    },
+    {
+        "id": "25",
+        "word": "eclipse"
+    },
+    {
+        "id": "26",
+        "word": "evident"
+    },
+    {
+        "id": "27",
+        "word": "famine"
+    },
+    {
+        "id": "28",
+        "word": "fathom"
+    },
+    {
+        "id": "29",
+        "word": "feasible"
+    },
+    {
+        "id": "30",
+        "word": "fragile"
+    },
+    {
+        "id": "31",
+        "word": "frenzy"
+    },
+    {
+        "id": "32",
+        "word": "genuine"
+    },
+    {
+        "id": "33",
+        "word": "glimpse"
+    },
+    {
+        "id": "34",
+        "word": "grateful"
+    },
+    {
+        "id": "35",
+        "word": "grumble"
+    },
+    {
+        "id": "36",
+        "word": "harmony"
+    },
+    {
+        "id": "37",
+        "word": "hostile"
+    },
+    {
+        "id": "38",
+        "word": "impact"
+    },
+    {
+        "id": "39",
+        "word": "impose"
+    },
+    {
+        "id": "40",
+        "word": "inspire"
+    },
+    {
+        "id": "41",
+        "word": "isolate"
+    },
+    {
+        "id": "42",
+        "word": "jeopardy"
+    },
+    {
+        "id": "43",
+        "word": "jovial"
+    },
+    {
+        "id": "44",
+        "word": "journey"
+    },
+    {
+        "id": "45",
+        "word": "leisure"
+    },
+    {
+        "id": "46",
+        "word": "melancholy"
+    },
+    {
+        "id": "47",
+        "word": "mystery"
+    },
+    {
+        "id": "48",
+        "word": "neither"
+    },
+    {
+        "id": "49",
+        "word": "noble"
+    },
+    {
+        "id": "50",
+        "word": "optimal"
+    },
+    {
+        "id": "51",
+        "word": "overcome"
+    },
+    {
+        "id": "52",
+        "word": "paradox"
+    },
+    {
+        "id": "53",
+        "word": "pensive"
+    },
+    {
+        "id": "54",
+        "word": "plausible"
+    },
+    {
+        "id": "55",
+        "word": "quaint"
+    },
+    {
+        "id": "56",
+        "word": "riddle"
+    },
+    {
+        "id": "57",
+        "word": "sanguine"
+    },
+    {
+        "id": "58",
+        "word": "serene"
+    },
+    {
+        "id": "59",
+        "word": "sparse"
+    },
+    {
+        "id": "60",
+        "word": "specific"
+    },
+    {
+        "id": "61",
+        "word": "strange"
+    },
+    {
+        "id": "62",
+        "word": "suspend"
+    },
+    {
+        "id": "63",
+        "word": "svelte"
+    },
+    {
+        "id": "64",
+        "word": "tactile"
+    },
+    {
+        "id": "65",
+        "word": "terse"
+    },
+    {
+        "id": "66",
+        "word": "transit"
+    },
+    {
+        "id": "67",
+        "word": "unveil"
+    },
+    {
+        "id": "68",
+        "word": "vacant"
+    },
+    {
+        "id": "69",
+        "word": "verdict"
+    },
+    {
+        "id": "70",
+        "word": "vivid"
+    },
+    {
+        "id": "71",
+        "word": "volatile"
+    },
+    {
+        "id": "72",
+        "word": "whimsy"
+    },
+    {
+        "id": "73",
+        "word": "worship"
+    },
+    {
+        "id": "74",
+        "word": "zealous"
+    },
+    {
+        "id": "75",
+        "word": "abandon"
+    },
+    {
+        "id": "76",
+        "word": "acquire"
+    },
+    {
+        "id": "77",
+        "word": "advice"
+    },
+    {
+        "id": "78",
+        "word": "aggregate"
+    },
+    {
+        "id": "79",
+        "word": "alter"
+    },
+    {
+        "id": "80",
+        "word": "autumn"
+    },
+    {
+        "id": "81",
+        "word": "benefit"
+    },
+    {
+        "id": "82",
+        "word": "beside"
+    },
+    {
+        "id": "83",
+        "word": "bizarre"
+    },
+    {
+        "id": "84",
+        "word": "bizarre"
+    },
+    {
+        "id": "85",
+        "word": "calmly"
+    },
+    {
+        "id": "86",
+        "word": "concept"
+    },
+    {
+        "id": "87",
+        "word": "digest"
+    },
+    {
+        "id": "88",
+        "word": "divorce"
+    },
+    {
+        "id": "89",
+        "word": "element"
+    },
+    {
+        "id": "90",
+        "word": "envy"
+    },
+    {
+        "id": "91",
+        "word": "frequent"
+    },
+    {
+        "id": "92",
+        "word": "leisure"
+    },
+    {
+        "id": "93",
+        "word": "meadow"
+    },
+    {
+        "id": "94",
+        "word": "museum"
+    },
+    {
+        "id": "95",
+        "word": "natural"
+    },
+    {
+        "id": "96",
+        "word": "obvious"
+    },
+    {
+        "id": "97",
+        "word": "offend"
+    },
+    {
+        "id": "98",
+        "word": "outlook"
+    },
+    {
+        "id": "99",
+        "word": "plastic"
+    },
+    {
+        "id": "100",
+        "word": "rivalry"
+    }
+]
