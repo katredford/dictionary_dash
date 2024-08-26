@@ -18,7 +18,7 @@ const getAPI = async (word: string, ) : Promise<any> => {
             url: `${getConfig.baseUrl}${word}`
         });
 
-        console.log('axios response', response)
+        // console.log('axios response', response)
 
         return {
             status: response.status,

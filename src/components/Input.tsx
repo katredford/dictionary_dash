@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { useWord } from './context/WordContext';
 
-interface InputProps {
-    word: string;
-}
+// interface InputProps {
+//     word: string;
+// }
 
-const Input: React.FC<InputProps> = ({ word }) => {
-    const [typedChars, setTypedChars] = useState<string[]>(new Array(word.length).fill(''));
-    const wordChars = word.split('');
+// const Input: React.FC<InputProps> = ({ word }) => {
 
-    console.log("whats THE WORD", word);
+const Input: React.FC = () => {
+    const { currentWord, fetchNewWord, loading, error} = useWord();
+    const [typedChars, setTypedChars] = useState<string[]>([]);
+
+    useEffect(() => {
+        setTypedChars(new Array(currentWord.length).fill(''));
+    }, [currentWord]);
+
+    const wordChars = currentWord.split('');
+
+    console.log("whats THE WORD", currentWord);
 
     const handleKeyPress = (event: KeyboardEvent) => {
         const { key } = event;
@@ -39,10 +48,19 @@ const Input: React.FC<InputProps> = ({ word }) => {
     };
 
     const handleSubmit = () => {
+        const wordArray = JSON.parse(localStorage.getItem("userAnswer") || "[]");
         const joinedChars = [wordChars[0], ...typedChars].join('');
         console.log("submitted words", joinedChars);
 
-        localStorage.setItem("userAnswer", joinedChars)
+        if (joinedChars === currentWord) {
+            console.log("you got it!!!")
+
+            wordArray.push(joinedChars)
+            localStorage.setItem("userAnswer", JSON.stringify(wordArray));
+
+            fetchNewWord();
+        }
+
     }
 
     useEffect(() => {
@@ -59,20 +77,20 @@ const Input: React.FC<InputProps> = ({ word }) => {
         <>
             <h3>Type the Word:</h3>
             <div className='wordbox'>
-           
-                {wordChars.map((char, index) => (
-                    
 
-                        <div
-                            className='blank'
-                            key={index}
-                        >
-                            <li>{(index === 0 ? wordChars[0] : typedChars[index - 1] || '').toUpperCase()} </li>
-                        </div>
-                   
+                {wordChars.map((char, index) => (
+
+
+                    <div
+                        className='blank'
+                        key={index}
+                    >
+                        <li>{(index === 0 ? wordChars[0] : typedChars[index - 1] || '').toUpperCase()} </li>
+                    </div>
+
                 ))}
             </div>
-                <button onClick={handleSubmit}>Enter</button>
+            <button onClick={handleSubmit}>Enter</button>
         </>
     );
 };
