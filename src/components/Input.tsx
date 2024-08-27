@@ -41,27 +41,34 @@ const Input: React.FC = () => {
                     updatedChars[index] = key;
                 }
             } else if (key === 'Enter') {
-                handleSubmit();
+                handleSubmit(true);
             }
             return updatedChars;
         });
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (isCorrect: boolean) => {
         const wordArray = JSON.parse(localStorage.getItem("userAnswer") || "[]");
         const joinedChars = [wordChars[0], ...typedChars].join('');
-        console.log("submitted words", joinedChars);
 
-        if (joinedChars === currentWord) {
-            console.log("you got it!!!")
+        const isWordCorrect = joinedChars === currentWord;
 
-            wordArray.push(joinedChars)
+        if (isWordCorrect || !isCorrect) {
+            const wordAdd = {
+                word: currentWord,
+                correct: isCorrect && isWordCorrect,
+            };
+            wordArray.push(wordAdd);
             localStorage.setItem("userAnswer", JSON.stringify(wordArray));
-
             fetchNewWord();
+        } else {
+            console.log("Incorrect word, but not skipping, so no action taken.");
         }
+     
 
     }
+
+  
 
     useEffect(() => {
         const handleKeyPressEvent = (event: KeyboardEvent) => handleKeyPress(event);
@@ -90,7 +97,8 @@ const Input: React.FC = () => {
 
                 ))}
             </div>
-            <button onClick={handleSubmit}>Enter</button>
+            <button name="wordGuess" onClick={() => handleSubmit(true)}>Enter</button>
+            <button name="skipWord" onClick={() => handleSubmit(false)}>SKIP</button>
         </>
     );
 };
