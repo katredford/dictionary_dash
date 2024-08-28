@@ -4,11 +4,12 @@ import WordDisplay from './components/WordDisplay';
 import Input from './components/Input';
 import ScoreList from './components/ScoreList';
 
-
+import Start from './components/Start';
 const App: React.FC = () => {
 
   const [time, setTime] = useState<number>(60);
-  const [isStarted, setIsStarted] = useState<boolean>(true);
+  const [isStarted, setIsStarted] = useState<boolean>(false);
+
 
   console.log("is started", isStarted)
 
@@ -21,6 +22,7 @@ const App: React.FC = () => {
 
   const handleTimeStart = () => {
     localStorage.clear();
+
     setIsStarted(true);
     const timer = setInterval(() => {
       setTime(prevTime => {
@@ -38,10 +40,22 @@ const App: React.FC = () => {
 
   return (
     <>
-    {!isStarted && 
+
+{/* <WordProvider>
+
+<WordDisplay />
+<Input />
+<ScoreList />
+</WordProvider> */}
+
+   
+     {!isStarted && 
+    <WordProvider>
+
       <button onClick={handleTimeStart}>
         START
       </button>
+    </WordProvider>
     }
 
     {isStarted && time > 0 && (
@@ -54,7 +68,17 @@ const App: React.FC = () => {
       </WordProvider>
       </>
       )}
-      {time === 0 && <ScoreList />}
+
+      {time === 0 && 
+
+<WordProvider>
+
+
+  <ScoreList />
+</WordProvider>
+      } 
+
+
     </>
   );
 };
