@@ -1,13 +1,32 @@
-import React, {useState} from 'react';
+
+
+import React, { useState, useEffect } from 'react';
+
 
 const ScoreList: React.FC = () => {
 
-    return(
-        <>
-        BOOP
-        </>
-    )
 
+    const wordScore = JSON.parse(localStorage.getItem("userAnswer") || "[]");
+
+    console.log("SCORELIST", wordScore)
+
+
+
+    return (
+        <>
+            <h3>Words and Definitions:</h3>
+            <ul>
+                {wordScore.map((word, index) => (
+                    <li
+                        key={index}
+                        style={{ color: word.skipped ? 'red'  : 'black' }}
+                    >
+                        {word.word}: {word.definition}
+                    </li>
+                ))}
+            </ul>
+        </>
+    );
 };
 
 export default ScoreList;
