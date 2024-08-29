@@ -73,8 +73,9 @@ const Input: React.FC = () => {
             <h3>Type the Word:</h3>
             <div className='wordbox'>
                 {wordChars.map((char, index) => (
+                   
                     <div className='blank' key={index}>
-                        <li>
+                        <li key={char}>
                             {(index === 0
                                 ? wordChars[0]
                                 : typedChars[index - 1] || (skipped ? wordChars[index] : '')

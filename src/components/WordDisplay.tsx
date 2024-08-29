@@ -20,7 +20,7 @@ const WordDisplay: React.FC = () => {
             const definitions: any = getLongestDefinitions();
             const definition = definitions[0]?.definition || "";
             const existingWord = JSON.parse(localStorage.getItem("userAnswer") || '[]').find((item: any) => item.word === currentWord);
-            const id = existingWord?.id || ''
+          
             saveWordToLocalStorage(currentWord, existingWord?.skipped || false, definition);
         }
     }, [currentData]);
