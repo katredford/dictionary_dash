@@ -1,11 +1,11 @@
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useWord } from './context/WordContext';
 
 const WordDisplay: React.FC = () => {
     const { currentWord, currentData, loading, getLongestDefinitions, saveWordToLocalStorage, error } = useWord();
     const [hintIndex, setHintIndex] = useState<number>(1);
-    // console.log("wordDislpay", currentData[0])
+
 
     useEffect(() => {
         if (currentData) {
@@ -30,20 +30,13 @@ const WordDisplay: React.FC = () => {
     if (!currentData || !currentData[0]?.meanings) {
         return <p>No data available</p>;
     }
-    
+
     const longestDefinitions = getLongestDefinitions();
 
 
-    console.log("longest array", longestDefinitions)
- 
-    
-    const firstMeaning = currentData[0]?.meanings?.length > 0 ? currentData[0].meanings[0] : null;
-
-    console.log("firstMeaning", firstMeaning);
-
     const handleHintClick = () => {
 
-        if(hintIndex < longestDefinitions.length) {
+        if (hintIndex < longestDefinitions.length) {
             setHintIndex(hintIndex + 1);
         }
     };
@@ -51,9 +44,7 @@ const WordDisplay: React.FC = () => {
 
     return (
         <>
-   
-
-<h1>
+            <h1>
                 {longestDefinitions[0]?.definition || "No definition available"}
             </h1>
             <h3>Part of Speech: {currentData[0]?.meanings[0]?.partOfSpeech.toUpperCase()}</h3>

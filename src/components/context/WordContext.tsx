@@ -27,6 +27,7 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [error, setError] = useState<string | null>(null);
 
     const randomWord = () => {
+   
         const randomIndex = Math.floor(Math.random() * wordlist.length);
         return wordlist[randomIndex].word
     };
@@ -46,16 +47,16 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const fetchNewWord = async () => {
         const fetchWordData = async (word: string) => {
-            console.log("fetchWordData", word)
+
             try {
                 const response = await getAPI(word);
-                console.log("context data fetch", response.data)
+
                 // check if the response contains an error message
                 if (response.data.title && response.data.message) {
-                    console.log('API response error:', response.data.message);
-                    return null; // Indicate that no valid data was found
+
+                    return null;
                 }
-    
+
                 // response.data is an array and select the first element
                 const wordData: WordData = {
                     word: response.data[0].word,
@@ -65,49 +66,49 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     license: response.data[0].license,
                     sourceUrls: response.data[0].sourceUrls,
                 };
-    
+
                 return wordData;
             } catch (err: any) {
                 console.error('Error fetching data:', err);
-                return null; 
+                return null;
             }
         };
-    
+
         const retryFetch = async (retries: number = 3) => {
             const word = randomWord();
             console.log('Attempting to fetch word:', word);
-    
+
             let data = await fetchWordData(word);
-        
+
             while (retries > 0 && data === null) {
                 console.log('Retrying...');
                 data = await fetchWordData(randomWord());
                 retries -= 1;
             }
-    
+
             if (data) {
-                setCurrentData([data]); 
+                setCurrentData([data]);
                 setCurrentWord(data.word);
                 setError(null);
             } else {
                 setError('No valid definitions found after multiple attempts.');
             }
-    
+
             setLoading(false);
         };
-    
+
         setLoading(true);
         await retryFetch();
     };
-    
+
     const saveWordToLocalStorage = (word: string, skipped: boolean, definition: string, id?: string) => {
         const wordArray = JSON.parse(localStorage.getItem("userAnswer") || "[]");
 
         if (id) {
             const index = wordArray.findIndex((item: any) => item.id === id);
 
-            if(index !== -1){
-                wordArray[index] = {...wordArray[index], word, skipped, definition};
+            if (index !== -1) {
+                wordArray[index] = { ...wordArray[index], word, skipped, definition };
             }
         } else {
 
@@ -118,8 +119,8 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 definition,
             };
             wordArray.push(wordObject);
-        
-        
+
+
         }
         localStorage.setItem("userAnswer", JSON.stringify(wordArray));
     };
@@ -157,7 +158,7 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
 export const useWord = () => {
     const context = useContext(WordContext);
-    if(!context) {
+    if (!context) {
         throw new Error('useWord must be used within word provider')
     }
 
