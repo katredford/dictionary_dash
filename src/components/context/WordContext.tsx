@@ -54,6 +54,7 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
     //     return longestDefinitions;
     // };
     
+    // const getLongestDefinitions = (): Definition[] => {
     const getLongestDefinitions = (): Definition[] => {
         if (!currentData || currentData.length === 0) return [];
     
