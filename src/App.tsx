@@ -4,7 +4,7 @@ import WordDisplay from './components/WordDisplay';
 import Input from './components/Input';
 import ScoreList from './components/ScoreList';
 
-import Start from './components/Start';
+
 const App: React.FC = () => {
 
   const [time, setTime] = useState<number>(60);
