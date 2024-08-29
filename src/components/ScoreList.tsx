@@ -1,6 +1,6 @@
 
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 
 const ScoreList: React.FC = () => {
@@ -12,7 +12,7 @@ const ScoreList: React.FC = () => {
         <>
             <h3>Words and Definitions:</h3>
             <ul>
-                {wordScore.map((word, index) => (
+                {wordScore.map((word: any, index: any) => (
                     <li
                         key={index}
                         style={{ color: word.skipped ? 'red' : 'black' }}

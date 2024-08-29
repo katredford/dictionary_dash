@@ -36,25 +36,6 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
 
-    // interface Definition {
-    //     definition: string;
-        
-    // }
-
-    // const getLongestDefinitions = (): Definition[] => {
-    //     if (!currentData || currentData.length === 0) return [];
-    
-    //     const longestMeaning = currentData[0]?.meanings.reduce((acc, curr) => {
-    //         return curr.definitions.length > acc.definitions.length ? curr : acc;
-    //     }, currentData[0]?.meanings[0]).definitions;
-
-    //     const longestDefinitions: Definition[] = longestMeaning?.definitions || [];
-
-    
-    //     return longestDefinitions;
-    // };
-    
-    // const getLongestDefinitions = (): Definition[] => {
     const getLongestDefinitions = (): Definition[] => {
         if (!currentData || currentData.length === 0) return [];
     

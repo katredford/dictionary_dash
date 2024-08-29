@@ -17,7 +17,7 @@ const WordDisplay: React.FC = () => {
     useEffect(() => {
         if (currentData) {
             // const definitions = getLongestDefinitions();
-            const definitions: unknown = getLongestDefinitions();
+            const definitions: any = getLongestDefinitions();
             const definition = definitions[0]?.definition || "";
             const existingWord = JSON.parse(localStorage.getItem("userAnswer") || '[]').find((item: any) => item.word === currentWord);
             const id = existingWord?.id || ''
@@ -64,7 +64,7 @@ const WordDisplay: React.FC = () => {
             </h1>
             <h3>Part of Speech: {currentData[0]?.meanings[0]?.partOfSpeech.toUpperCase()}</h3>
             <ul>
-                {longestDefinitions.slice(1, hintIndex).map((definition, index) => (
+                {longestDefinitions.slice(1, hintIndex).map((definition: any, index: any) => (
                     <li key={index}>{definition.definition}</li>
                 ))}
             </ul>
