@@ -9,25 +9,27 @@ const App: React.FC = () => {
 
   const [time, setTime] = useState<number>(60);
   const [isStarted, setIsStarted] = useState<boolean>(false);
+  const [isRestarting, setIsRestarting] = useState<boolean>(false);
 
 
-  console.log("is started", isStarted)
 
   useEffect(() => {
     if (time === 0) {
       setIsStarted(false);
     }
-  },[time])
+  }, [time])
 
 
   const handleTimeStart = () => {
     localStorage.clear();
-
+    setIsRestarting(false);
     setIsStarted(true);
+    setTime(60);
     const timer = setInterval(() => {
       setTime(prevTime => {
         if (prevTime === 0) {
           clearInterval(timer);
+          setIsRestarting(true);
           return prevTime;
         }
         return prevTime - 1;
@@ -41,42 +43,36 @@ const App: React.FC = () => {
   return (
     <>
 
-{/* <WordProvider>
+      {/* <WordProvider>
+    <WordDisplay />
+    <Input />
+    <ScoreList />
+    </WordProvider> */}
 
-<WordDisplay />
-<Input />
-<ScoreList />
-</WordProvider> */}
 
-   
-     {!isStarted && 
-    <WordProvider>
+      {!isStarted &&
+        <WordProvider>
+          <button onClick={handleTimeStart}>
+            {isRestarting ? 'AGAIN' : 'START'}
+          </button>
+        </WordProvider>
+      }
 
-      <button onClick={handleTimeStart}>
-        START
-      </button>
-    </WordProvider>
-    }
-
-    {isStarted && time > 0 && (
-     <>
-     <p>Time Remaining: {time} seconds</p>
-      <WordProvider>
-
-        <WordDisplay />
-        <Input />
-      </WordProvider>
-      </>
+      {isStarted && time > 0 && (
+        <>
+          <p>Time Remaining: {time} seconds</p>
+          <WordProvider>
+            <WordDisplay />
+            <Input />
+          </WordProvider>
+        </>
       )}
 
-      {time === 0 && 
-
-<WordProvider>
-
-
-  <ScoreList />
-</WordProvider>
-      } 
+      {time === 0 &&
+        <WordProvider>
+          <ScoreList />
+        </WordProvider>
+      }
 
 
     </>
