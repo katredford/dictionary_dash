@@ -1,32 +1,32 @@
-// {
-//   "files": [],
-//   "references": [
-//     { "path": "./tsconfig.app.json" },
-//     { "path": "./tsconfig.node.json" }
-//   ]
-// }
 {
-  "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "noImplicitAny": false,
-    "lib": ["dom", "es2017"],
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "baseUrl": "./src"
-  },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["node_modules"],
+  "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ]
 }
+// {
+//   "compilerOptions": {
+//     "target": "es6",
+//     "module": "commonjs",
+//     "noImplicitAny": false,
+//     "lib": ["dom", "es2017"],
+//     "strict": true,
+//     "esModuleInterop": true,
+//     "skipLibCheck": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "resolveJsonModule": true,
+//     "outDir": "./dist",
+//     "rootDir": "./src",
+//     "baseUrl": "./src"
+//   },
+//   "include": ["src/**/*.ts", "src/**/*.tsx"],
+//   "exclude": ["node_modules"],
+//   "references": [
+//     { "path": "./tsconfig.app.json" },
+//     { "path": "./tsconfig.node.json" }
+//   ]
+// }
 
 // Test Locally: 
 // Run tsc --noEmit 

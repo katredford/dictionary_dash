@@ -46,7 +46,8 @@ const Input: React.FC = () => {
         const isWordCorrect = joinedChars === currentWord;
 
         // store word data in local storage
-        saveWordToLocalStorage(currentWord, isSkipped, wordObject?.definition || "", wordObject?.id);
+        saveWordToLocalStorage(currentWord, isSkipped, wordObject?.definition || "");
+        // saveWordToLocalStorage(currentWord, isSkipped, wordObject?.definition || "", wordObject?.id);
 
         // handle next steps based on whether the word was skipped or correctly guessed
         if (isSkipped) {
