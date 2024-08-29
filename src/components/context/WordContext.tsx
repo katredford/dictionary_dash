@@ -11,11 +11,14 @@ interface WordContextProps {
     getLongestDefinitions: () => void;
     loading: boolean;
     error: string | null;
-    saveWordData: (word: string, skipped: boolean) => void;
-    saveDefinitionData: (definitions: { id: string; definition: string }[]) => void;
     getStoredWords: () => { id: string; word: string; skipped: boolean }[];
     getStoredDefinitions: () => { id: string; definition: string }[];
     saveWordToLocalStorage: (word: string, skipped: boolean, definition: string) => void;
+}
+
+interface Definition {
+    definition: string;
+    
 }
 
 const WordContext = createContext<WordContextProps | undefined>(undefined);
@@ -33,16 +36,34 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
 
+    // interface Definition {
+    //     definition: string;
+        
+    // }
 
-    const getLongestDefinitions = () => {
+    // const getLongestDefinitions = (): Definition[] => {
+    //     if (!currentData || currentData.length === 0) return [];
+    
+    //     const longestMeaning = currentData[0]?.meanings.reduce((acc, curr) => {
+    //         return curr.definitions.length > acc.definitions.length ? curr : acc;
+    //     }, currentData[0]?.meanings[0]).definitions;
+
+    //     const longestDefinitions: Definition[] = longestMeaning?.definitions || [];
+
+    
+    //     return longestDefinitions;
+    // };
+    
+    const getLongestDefinitions = (): Definition[] => {
         if (!currentData || currentData.length === 0) return [];
-
-        const longestDefinitions = currentData[0]?.meanings.reduce((acc, curr) => {
+    
+        const longestMeaning = currentData[0]?.meanings.reduce((acc, curr) => {
             return curr.definitions.length > acc.definitions.length ? curr : acc;
-        }, currentData[0]?.meanings[0]).definitions;
-
-        return longestDefinitions;
+        }, currentData[0]?.meanings[0]);
+    
+        return longestMeaning?.definitions ?? [];
     };
+    
 
 
     const fetchNewWord = async () => {
