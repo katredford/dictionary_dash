@@ -6,10 +6,12 @@ const WordDisplay: React.FC = () => {
     const { currentWord, currentData, loading, getLongestDefinitions, saveWordToLocalStorage, error } = useWord();
     const [hintIndex, setHintIndex] = useState<number>(1);
 
+    
 
     useEffect(() => {
         if (currentData) {
-            const definition = getLongestDefinitions()[0]?.definition || "";
+            const definitions = getLongestDefinitions();
+            const definition = definitions[0]?.definition || "";
             const existingWord = JSON.parse(localStorage.getItem("userAnser") || '[]').find((item: any) => item.word === currentWord);
             saveWordToLocalStorage(currentWord, existingWord?.skipped || false, definition, existingWord?.id);
         }
@@ -31,7 +33,13 @@ const WordDisplay: React.FC = () => {
         return <p>No data available</p>;
     }
 
+    // const longestDefinitions = getLongestDefinitions();
+
     const longestDefinitions = getLongestDefinitions();
+
+if (longestDefinitions.length === 0) {
+    return <p>No definitions available</p>;
+}
 
 
     const handleHintClick = () => {
