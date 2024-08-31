@@ -106,7 +106,7 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const saveWordToLocalStorage = (word: string, skipped: boolean, definition: string, id?: string) => {
         const wordArray = JSON.parse(localStorage.getItem("userAnswer") || "[]");
-
+        // console.log(id)
         if (id) {
             const index = wordArray.findIndex((item: any) => item.id === id);
 

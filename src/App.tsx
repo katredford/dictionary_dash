@@ -3,11 +3,12 @@ import { WordProvider } from './components/context/WordContext';
 import WordDisplay from './components/WordDisplay';
 import Input from './components/Input';
 import ScoreList from './components/ScoreList';
+import Header from './components/Header'
 
 
 const App: React.FC = () => {
 
-  const [time, setTime] = useState<number>(60);
+  const [time, setTime] = useState<number>(500);
   const [isStarted, setIsStarted] = useState<boolean>(false);
   const [isRestarting, setIsRestarting] = useState<boolean>(false);
 
@@ -42,17 +43,23 @@ const App: React.FC = () => {
 
   return (
     <>
+    <div className='row column align-center'>
+    <Header />
+    
 
-      {/* <WordProvider>
+      <WordProvider>
     <WordDisplay />
     <Input />
     <ScoreList />
-    </WordProvider> */}
+    </WordProvider>
 
 
-      {!isStarted &&
+      {/* {!isStarted &&
         <WordProvider>
-          <button onClick={handleTimeStart}>
+          <h2>How many words can you get in 60 seconds?</h2>
+          <button 
+          className='start'
+          onClick={handleTimeStart}>
             {isRestarting ? 'AGAIN' : 'START'}
           </button>
         </WordProvider>
@@ -60,7 +67,9 @@ const App: React.FC = () => {
 
       {isStarted && time > 0 && (
         <>
-          <p>Time Remaining: {time} seconds</p>
+          <p className='timer'>
+             {time} 
+          </p>
           <WordProvider>
             <WordDisplay />
             <Input />
@@ -72,9 +81,9 @@ const App: React.FC = () => {
         <WordProvider>
           <ScoreList />
         </WordProvider>
-      }
+      }  */}
 
-
+</div>
     </>
   );
 };

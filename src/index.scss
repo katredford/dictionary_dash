@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,36 +7,59 @@
     font-family: sans-serif;
 }
 
-html, body {
+
+
+html,
+body {
     height: 100%;
 }
 
 li {
     list-style-type: none;
 
+
+
 }
 
 ul {
-    margin-left: 15px;
+    // margin-left: 15px;
 }
 
+// button {
 
+// }
+header {
+    width: 100%;
+    background: rgb(46, 42, 20);
+    padding: 10px;
+   
 
+    span {
+        color: rgb(225, 224, 205)
+    }
+}
+
+span {
+    margin: 3px;
+}
 .blank {
-    border-bottom: solid 2px black;
+    border-bottom: solid 3px black;
     width: 30px;
     height: 30px;
     text-align: center;
     line-height: 20px;
     margin: 2px;
-  }
+    font-size: 30px;
+}
 
 .wordbox {
     display: flex;
+    margin: 15px;
 }
 
 //GLOBAL CLASSES 
-.row, .column {
+.row,
+.column {
     display: flex;
 }
 
@@ -67,5 +92,73 @@ ul {
 }
 
 
+
 //CUSTOME STYLES
 
+.wordDisplay {
+    padding: 10px;
+}
+
+.definition {
+    font-size: 20px;
+    background-color: rgb(225, 224, 205);
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.definition-li {
+    margin: 10px;
+    background-color: rgb(225, 224, 205);
+    padding: 4px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.hint {
+    border-color: rgb(46, 42, 20);
+    display: inline-flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: -0.5em 1em; 
+    font-size: 17px;
+    background-color: #e3e0cf; 
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+    line-height: 1; 
+    text-align: center; 
+    min-width: 3em; 
+    min-height: 1.5em; 
+    margin: 5px;
+}
+
+.start {
+    border-color: rgb(46, 42, 20);
+    display: inline-flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 0.5em 1em; 
+    font-size: 23px;
+    background-color: #e3e0cf; 
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+    line-height: 1; 
+    text-align: center; 
+    min-width: 3em; 
+    min-height: 1.5em; 
+    margin: 5px;
+}
+
+.timer {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 30px;
+    margin: 10px; 
+    background-color: rgb(46, 42, 20);
+    color: rgb(225, 224, 205);
+    padding: 10px;
+    border-radius: 5px;
+    width: 72px;
+    text-align: center;
+}

@@ -4,12 +4,12 @@ import { useWord } from './context/WordContext';
 
 const WordDisplay: React.FC = () => {
     const { currentWord,
-            currentData,
-            loading,
-            getLongestDefinitions,
-            saveWordToLocalStorage,
-            error
-        } = useWord();
+        currentData,
+        loading,
+        getLongestDefinitions,
+        saveWordToLocalStorage,
+        error
+    } = useWord();
     const [hintIndex, setHintIndex] = useState<number>(1);
 
 
@@ -20,7 +20,7 @@ const WordDisplay: React.FC = () => {
             const definitions: any = getLongestDefinitions();
             const definition = definitions[0]?.definition || "";
             const existingWord = JSON.parse(localStorage.getItem("userAnswer") || '[]').find((item: any) => item.word === currentWord);
-          
+
             saveWordToLocalStorage(currentWord, existingWord?.skipped || false, definition, existingWord?.id);
         }
     }, [currentData]);
@@ -59,23 +59,29 @@ const WordDisplay: React.FC = () => {
 
     return (
         <>
-            <h1>
+        <div className='wordDisplay column align-center'>
+            <p className='definition'>
+            <h3>Definition:</h3>
                 {longestDefinitions[0]?.definition || "No definition available"}
-            </h1>
+            </p>
             <h3>Part of Speech: {currentData[0]?.meanings[0]?.partOfSpeech.toUpperCase()}</h3>
             <ul>
                 {longestDefinitions.slice(1, hintIndex).map((definition: any, index: any) => (
-                    <li key={index}>{definition.definition}</li>
+                    <li 
+                    className="definition-li"
+                    key={index}>{definition.definition}
+                    </li>
                 ))}
             </ul>
             <button
+                className='hint'
                 onClick={handleHintClick}
                 disabled={hintIndex >= longestDefinitions.length}
-                style={{ backgroundColor: hintIndex >= longestDefinitions.length ? 'grey' : 'initial' }}
+                style={{ backgroundColor: hintIndex >= longestDefinitions.length ? 'grey' : ' #e3e0cf' }}
             >
                 Hint
             </button>
-
+            </div>
         </>
     );
 };
