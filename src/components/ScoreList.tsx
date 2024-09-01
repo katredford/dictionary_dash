@@ -8,28 +8,39 @@ const ScoreList: React.FC = () => {
 
     const wordScore = JSON.parse(localStorage.getItem("userAnswer") || "[]");
 
+    const totalSkippedTrue = wordScore.filter((word: any) => word.skipped === false).length;
+    const lastItem = wordScore[wordScore.length - 1];
+    const adjustedTotal = lastItem && lastItem.skipped === false ? totalSkippedTrue - 1 : totalSkippedTrue;
+
+
     return (
         <>
-            <h3>Words and Definitions:</h3>
+            <h2 style={{ margin: '10px' }}>Correct Words:
+                <span className='startLetter'>
+                    {adjustedTotal}
 
-            <ul className='column'>
+                </span>
+            </h2>
+            <h3>Words and Definitions: {wordScore.length}</h3>
 
-                {wordScore
-                    .filter((_: any, index: number) => index % 2 === 1)
-                    .map((word: any, index: any) => (
-                        <>
-                            <li
-                                className='hint'
-                                key={index}
-                                style={{ color: word.skipped ? 'red' : 'black' }}
-                            >
-                                <span key={index} style={{ fontWeight: 'bold', padding:'5px'}}>{word.word}:</span>
+            <ul className='column wordAnswers'>
 
+                {wordScore.map((word: any, index: number) => (
+                    <li
+                        className='hint'
+                        key={word.id}
+                        style={{
+                            color: word.skipped ? 'red' : 'black',
+                            opacity: index === wordScore.length - 1 ? 0.5 : 1
+                        }}
+                    >
+                        <span style={{ fontWeight: 'bold', padding: '5px' }}>
+                            {word.word}:
+                        </span>
+                        {word.definition}
+                    </li>
+                ))}
 
-                                {word.definition}
-                            </li>
-                        </>
-                    ))}
             </ul>
 
         </>
@@ -38,6 +49,3 @@ const ScoreList: React.FC = () => {
 
 export default ScoreList;
 
-
-
-// Cannot update a component (`WordProvider`) while rendering a different component (`Input`). To locate the bad setState() call inside `Input`, follow the stack trace as described i

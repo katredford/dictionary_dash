@@ -43,47 +43,47 @@ const App: React.FC = () => {
 
   return (
     <>
-    <div className='row column align-center'>
-    <Header />
-    
+      <div className='row column align-center'>
+        <Header />
 
-      {/* <WordProvider>
+
+        {/* <WordProvider>
     <WordDisplay />
     <Input />
     <ScoreList />
     </WordProvider> */}
 
 
-      {!isStarted &&
-        <WordProvider>
-          <h2>How many words can you guess in 60 seconds?</h2>
-          <button 
-          className='start'
-          onClick={handleTimeStart}>
-            {isRestarting ? 'AGAIN' : 'START'}
-          </button>
-        </WordProvider>
-      }
-
-      {isStarted && time > 0 && (
-        <>
-          <p className='timer'>
-             {time} 
-          </p>
+        {!isStarted &&
           <WordProvider>
-            <WordDisplay />
-            <Input />
+            <h2>How many words can you guess in 60 seconds?</h2>
+            <button
+              className='start'
+              onClick={handleTimeStart}>
+              {isRestarting ? 'AGAIN' : 'START'}
+            </button>
           </WordProvider>
-        </>
-      )}
+        }
 
-      {time === 0 &&
-        <WordProvider>
-          <ScoreList />
-        </WordProvider>
-      } 
+        {isStarted && time > 0 && (
+          <>
+            <p className='timer'>
+              {time}
+            </p>
+            <WordProvider>
+              <WordDisplay />
+              <Input />
+            </WordProvider>
+          </>
+        )}
 
-</div>
+        {time === 0 &&
+          <WordProvider>
+            <ScoreList />
+          </WordProvider>
+        }
+
+      </div>
     </>
   );
 };

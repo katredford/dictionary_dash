@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useWord } from './context/WordContext';
 import KeyBoard from './keyboard/KeyBoard';
 
-const Input: React.FC = () => {
 
+const Input = () => {
+    const skipButtonRef = useRef<HTMLButtonElement | null>(null);
     const { currentWord, saveWordToLocalStorage, fetchNewWord } = useWord();
     const [typedChars, setTypedChars] = useState<string[]>([]);
     const [skipped, setSkipped] = useState<boolean>(false);
@@ -13,15 +14,14 @@ const Input: React.FC = () => {
         setSkipped(false);
     }, [currentWord]);
 
-    // const wordChars = currentWord.split('');
     const wordChars = currentWord.split('').map(char => char.toUpperCase());
 
     const handleKeyClick = (char: string) => {
         if (skipped && char !== 'NEXT') return;
-        setTypedChars((prevTypedChars) => {
+    
+        setTypedChars(prevTypedChars => {
             const updatedChars = [...prevTypedChars];
             if (char === 'BACK') {
-
                 const index = updatedChars.indexOf('');
                 if (index === -1) {
                     updatedChars[updatedChars.length - 1] = '';
@@ -34,22 +34,21 @@ const Input: React.FC = () => {
                     updatedChars[index] = char;
                 }
             } else if (char === 'ENTER') {
-
                 handleSubmit(false);
             } else if (char === 'SKIP') {
-                setSkipped(true);
+                handleSubmit(true);
                 setTypedChars(wordChars);
             }
             return updatedChars;
         });
-    }
+    };
+
 
     const handleKeyPress = (event: KeyboardEvent) => {
         const { key } = event;
-
         if (skipped) return;
 
-        setTypedChars((prevTypedChars) => {
+        setTypedChars(prevTypedChars => {
             const updatedChars = [...prevTypedChars];
             if (key === 'Backspace') {
                 const index = updatedChars.indexOf('');
@@ -61,79 +60,72 @@ const Input: React.FC = () => {
             } else if (key.length === 1 && /[a-zA-Z0-9]/.test(key)) {
                 const index = updatedChars.indexOf('');
                 if (index !== -1) {
-                    // updatedChars[index] = key;
                     updatedChars[index] = key.toUpperCase();
                 }
             } else if (key === 'Enter') {
                 handleSubmit(false);
-                // setTypedChars(wordChars);
             }
             return updatedChars;
         });
     };
 
-
-
     const handleSubmit = (isSkipped: boolean) => {
-        console.log("hello")
         const wordArray = JSON.parse(localStorage.getItem("userAnswer") || "[]");
         const wordObject = wordArray.find((item: any) => item.word === currentWord);
         const joinedChars = typedChars.join('');
         const isWordCorrect = joinedChars.toUpperCase() === currentWord.toUpperCase();
-        console.log("is word correct", isWordCorrect, joinedChars)
-        // store word data in local storage
-        saveWordToLocalStorage(currentWord, isSkipped, wordObject?.definition || "");
-        // saveWordToLocalStorage(currentWord, isSkipped, wordObject?.definition || "", wordObject?.id);
+    
+        saveWordToLocalStorage(currentWord, isSkipped, wordObject?.definition || "", wordObject?.id);
+    
 
-        // handle next steps based on whether the word was skipped or correctly guessed
         if (isSkipped) {
             setSkipped(true);
             setTypedChars(wordChars);
+            // if (skipButtonRef.current) {
+            //     console.log(skipButtonRef.current)
+            //     skipButtonRef.current.blur(); 
+            // }
         } else if (isWordCorrect) {
-            console.log('what')
-            fetchNewWord();
+            // delay fetchNewWord call
+            setTimeout(() => {
+                fetchNewWord();
+            }, 0);
             setSkipped(false);
         }
     };
-
+    
 
     useEffect(() => {
         const handleKeyPressEvent = (event: KeyboardEvent) => handleKeyPress(event);
-
         window.addEventListener('keydown', handleKeyPressEvent);
-
         return () => {
             window.removeEventListener('keydown', handleKeyPressEvent);
         };
-    }, [typedChars, skipped]);
+    }, [typedChars]);
+
+    useEffect(() => {
+        if (skipButtonRef.current) {
+            skipButtonRef.current.blur();
+        }
+    }, [skipped]); 
 
     return (
         <>
-
             <h3>Type the Word Starting with:
-                <span className='startLetter'>
-                    {wordChars[0]}
-                </span>
+                <span className='startLetter'>{wordChars[0]}</span>
             </h3>
             <div className='wordbox'>
                 {wordChars.map((char, index) => (
-
                     <div className='blank' key={index}>
-
-                        <li key={index}>
+                        <li key={index} value={char}>
                             {typedChars[index] || (skipped ? wordChars[index] : '')}
                         </li>
                     </div>
                 ))}
             </div>
-
             <div className='column'>
-
                 <KeyBoard keyClick={handleKeyClick} />
-
                 <div className='spKeyBox'>
-
-
                     <button
                         style={{ backgroundColor: skipped ? 'grey' : '#e3e0cf' }}
                         className="spKeys"
@@ -142,35 +134,21 @@ const Input: React.FC = () => {
                     >
                         ENTER
                     </button>
-
                     {skipped ? (
-
-                        <button
-                            className="spKeys"
-                            onClick={fetchNewWord}>
-                            NEXT
-                        </button>
+                        <button className="spKeys" onClick={fetchNewWord}>NEXT</button>
                     ) : (
-                        <button
-                            className="spKeys"
-                            onClick={() => handleKeyClick("SKIP")}>
+                        <button 
+                        ref={skipButtonRef}
+                        className="spKeys" 
+                        onClick={() => handleKeyClick("SKIP")}>
                             SKIP
                         </button>
-
                     )}
-                    <button
-                        className="spKeys"
-                        onClick={() => handleKeyClick("BACK")}>
-                        ←
-                    </button>
+                    <button className="spKeys" onClick={() => handleKeyClick("BACK")}>←</button>
                 </div>
             </div>
-
-
         </>
     );
 };
-
-
 
 export default Input;

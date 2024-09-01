@@ -21,7 +21,7 @@ const WordDisplay: React.FC = () => {
             const definition = definitions[0]?.definition || "";
             const existingWord = JSON.parse(localStorage.getItem("userAnswer") || '[]').find((item: any) => item.word === currentWord);
 
-            saveWordToLocalStorage(currentWord, existingWord?.skipped || false, definition);
+            saveWordToLocalStorage(currentWord, existingWord?.skipped || false, definition, existingWord?.id);
         }
     }, [currentData]);
 

@@ -189,3 +189,13 @@ span {
     white-space: nowrap;
     box-sizing: border-box;
 }
+
+.wordAnswers {
+    text-align: left; 
+    padding-left: 0;  
+    list-style-position: inside; 
+}
+
+.wordAnswers .hint {
+    padding: 5px 0;
+}

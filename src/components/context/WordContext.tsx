@@ -13,7 +13,7 @@ interface WordContextProps {
     error: string | null;
     getStoredWords: () => { id: string; word: string; skipped: boolean }[];
     getStoredDefinitions: () => { id: string; definition: string }[];
-    saveWordToLocalStorage: (word: string, skipped: boolean, definition: string) => void;
+    saveWordToLocalStorage: (word: string, skipped: boolean, definition: string, id?:string) => void;
 }
 
 interface Definition {
@@ -106,15 +106,15 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const saveWordToLocalStorage = (word: string, skipped: boolean, definition: string, id?: string) => {
         const wordArray = JSON.parse(localStorage.getItem("userAnswer") || "[]");
-        // console.log(id)
+    
         if (id) {
             const index = wordArray.findIndex((item: any) => item.id === id);
-
             if (index !== -1) {
                 wordArray[index] = { ...wordArray[index], word, skipped, definition };
+            } else {
+                console.warn(`No word found with id: ${id}`);
             }
         } else {
-
             const wordObject = {
                 id: uuidv4(),
                 word,
@@ -122,11 +122,11 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 definition,
             };
             wordArray.push(wordObject);
-
-
         }
+    
         localStorage.setItem("userAnswer", JSON.stringify(wordArray));
     };
+
 
     const getStoredWords = () => {
         return JSON.parse(localStorage.getItem("userAnswer") || "[]");
