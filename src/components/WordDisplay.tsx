@@ -21,7 +21,7 @@ const WordDisplay: React.FC = () => {
             const definition = definitions[0]?.definition || "";
             const existingWord = JSON.parse(localStorage.getItem("userAnswer") || '[]').find((item: any) => item.word === currentWord);
 
-            saveWordToLocalStorage(currentWord, existingWord?.skipped || false, definition, existingWord?.id);
+            saveWordToLocalStorage(currentWord, existingWord?.skipped || false, definition);
         }
     }, [currentData]);
 
@@ -59,28 +59,30 @@ const WordDisplay: React.FC = () => {
 
     return (
         <>
-        <div className='wordDisplay column align-center'>
-            <p className='definition'>
-            <h3>Definition:</h3>
-                {longestDefinitions[0]?.definition || "No definition available"}
-            </p>
-            <h3>Part of Speech: {currentData[0]?.meanings[0]?.partOfSpeech.toUpperCase()}</h3>
-            <ul>
-                {longestDefinitions.slice(1, hintIndex).map((definition: any, index: any) => (
-                    <li 
-                    className="definition-li"
-                    key={index}>{definition.definition}
-                    </li>
-                ))}
-            </ul>
-            <button
-                className='hint'
-                onClick={handleHintClick}
-                disabled={hintIndex >= longestDefinitions.length}
-                style={{ backgroundColor: hintIndex >= longestDefinitions.length ? 'grey' : ' #e3e0cf' }}
-            >
-                Hint
-            </button>
+            <div className='wordDisplay column align-center'>
+            
+                <p className='definition'>
+                    <span style={{ fontWeight: 'bold' }}>Definition:</span>
+                    <br />
+                    {longestDefinitions[0]?.definition || "No definition available"}
+                </p>
+                <p>Part of Speech: {currentData[0]?.meanings[0]?.partOfSpeech.toUpperCase()}</p>
+                <ul>
+                    {longestDefinitions.slice(1, hintIndex).map((definition: any, index: any) => (
+                        <li
+                            className="definition-li"
+                            key={index}>{definition.definition}
+                        </li>
+                    ))}
+                </ul>
+                <button
+                    className='hint'
+                    onClick={handleHintClick}
+                    disabled={hintIndex >= longestDefinitions.length}
+                    style={{ backgroundColor: hintIndex >= longestDefinitions.length ? 'grey' : ' #e3e0cf' }}
+                >
+                    Hint
+                </button>
             </div>
         </>
     );

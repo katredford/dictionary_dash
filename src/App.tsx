@@ -47,16 +47,16 @@ const App: React.FC = () => {
     <Header />
     
 
-      <WordProvider>
+      {/* <WordProvider>
     <WordDisplay />
     <Input />
     <ScoreList />
-    </WordProvider>
+    </WordProvider> */}
 
 
-      {/* {!isStarted &&
+      {!isStarted &&
         <WordProvider>
-          <h2>How many words can you get in 60 seconds?</h2>
+          <h2>How many words can you guess in 60 seconds?</h2>
           <button 
           className='start'
           onClick={handleTimeStart}>
@@ -81,7 +81,7 @@ const App: React.FC = () => {
         <WordProvider>
           <ScoreList />
         </WordProvider>
-      }  */}
+      } 
 
 </div>
     </>
