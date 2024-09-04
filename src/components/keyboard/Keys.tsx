@@ -3,7 +3,7 @@ import React from 'react'
 interface KeysProps {
     char: string;
     onClick: (char: string) => void;
-   
+    className?:string;
 }
 
 const Keys: React.FC<KeysProps> = ({char, onClick}) => {

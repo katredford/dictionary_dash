@@ -81,10 +81,6 @@ const Input = () => {
         if (isSkipped) {
             setSkipped(true);
             setTypedChars(wordChars);
-            // if (skipButtonRef.current) {
-            //     console.log(skipButtonRef.current)
-            //     skipButtonRef.current.blur(); 
-            // }
         } else if (isWordCorrect) {
             // delay fetchNewWord call
             setTimeout(() => {
@@ -126,6 +122,23 @@ const Input = () => {
             <div className='column'>
                 <KeyBoard keyClick={handleKeyClick} />
                 <div className='spKeyBox'>
+                    {skipped ? (
+                        <button 
+                        className="spKeys" 
+                        onClick={fetchNewWord}
+                        >
+                            NEXT
+                        </button>
+                    ) : (
+                        <button 
+                        ref={skipButtonRef}
+                        className="spKeys" 
+                        style={{backgroundColor: "#ff0404b3"}}
+                        onClick={() => handleKeyClick("SKIP")}
+                        >
+                            SKIP
+                        </button>
+                    )}
                     <button
                         style={{ backgroundColor: skipped ? 'grey' : '#e3e0cf' }}
                         className="spKeys"
@@ -134,16 +147,6 @@ const Input = () => {
                     >
                         ENTER
                     </button>
-                    {skipped ? (
-                        <button className="spKeys" onClick={fetchNewWord}>NEXT</button>
-                    ) : (
-                        <button 
-                        ref={skipButtonRef}
-                        className="spKeys" 
-                        onClick={() => handleKeyClick("SKIP")}>
-                            SKIP
-                        </button>
-                    )}
                     <button className="spKeys" onClick={() => handleKeyClick("BACK")}>←</button>
                 </div>
             </div>

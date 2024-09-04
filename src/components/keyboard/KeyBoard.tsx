@@ -5,17 +5,11 @@ import './keyboard.css'
 
 
 interface KeyBoardProps {
-    
     keyClick: (char: string) => void;
-    
+
 }
 
-const KeyBoard: React.FC<KeyBoardProps> = ({keyClick}) => {
-
-
-    // const handleKeyCLick = (char: string) => {
-    //     console.log(char);
-    // }
+const KeyBoard: React.FC<KeyBoardProps> = ({ keyClick }) => {
 
 
     return (
@@ -24,10 +18,16 @@ const KeyBoard: React.FC<KeyBoardProps> = ({keyClick}) => {
                 <div className='lettersBox'>
 
                     {letters.map((letter) => (
-                        <Keys key={letter.id} char={letter.letter} onClick={keyClick} />
+
+                        <Keys
+                            key={letter.id}
+                            char={letter.letter}
+                            onClick={keyClick}
+                            className={letter.letter === "P" || letter.letter === "L" ? "key break-after" : "keys"}
+                        />
                     ))}
                 </div>
-           
+
             </div>
         </>
     )

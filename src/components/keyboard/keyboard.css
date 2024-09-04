@@ -1,25 +1,30 @@
 * {
     margin: 0;
-    padding:0;
+    padding: 0;
     box-sizing: border-box;
-    color:rgb(28, 25, 10)
+    color: rgb(28, 25, 10)
 }
 
 .keybox {
     width: 375px;
     display: flex;
     flex-direction: column;
-    /* border: 2px solid rgb(46, 42, 20); */
 }
 
 
 .lettersBox {
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 8px; 
+    gap: 8px;
     padding: 5px;
+}
+
+
+.break-after {
+    margin-right: auto;
+    
 }
 
 .keys {
@@ -30,35 +35,10 @@
     height: 46px;
     font-size: 23px;
     border-color: rgb(46, 42, 20);
-    background-color: #e3e0cf; 
+    background-color: #e3e0cf;
     border-radius: 5px;
     cursor: pointer;
     user-select: none;
-    margin:0;
+    margin: 0;
 }
 
-.spKeyBox {
-    border-color: rgb(46, 42, 20);
-    display: inline-flex;
-    justify-content: space-between; 
-    margin: 5px;
-    width: 375px;
-}
-
-.spKeys {
-    border-color: rgb(46, 42, 20);
-    display: inline-flex;
-    justify-content: center; 
-    align-items: center; 
-    padding: 0.5em 1em; 
-    font-size: 23px;
-    background-color: #e3e0cf; 
-    border-radius: 5px;
-    cursor: pointer;
-    user-select: none;
-    line-height: 1; 
-    text-align: center; 
-    min-width: 3em; 
-    min-height: 1.5em; 
-    margin: 5px;
-}
