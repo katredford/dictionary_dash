@@ -27,17 +27,19 @@ const ScoreList: React.FC = () => {
 
                 {wordScore.map((word: any, index: number) => (
                     <li
-                        className='hint'
+                        className='hint '
                         key={word.id}
                         style={{
                             color: word.skipped ? 'red' : 'black',
                             opacity: index === wordScore.length - 1 ? 0.5 : 1
                         }}
                     >
-                        <span style={{ fontWeight: 'bold', padding: '5px' }}>
+                        <span style={{ fontWeight: 'bold', margin: '3px' }}>
                             {word.word}:
                         </span>
-                        {word.definition}
+                        <p style={{color: word.skipped ? 'red' : 'black'}}>
+                            {word.definition}
+                        </p>
                     </li>
                 ))}
 

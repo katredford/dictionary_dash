@@ -2,8 +2,8 @@ import React, { ChangeEvent, useState, useEffect, useRef } from 'react';
 import WordDisplay from './components/WordDisplay';
 import Input from './components/Input';
 import ScoreList from './components/ScoreList';
-import Header from './components/Header'
-
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 const App: React.FC = () => {
 
@@ -147,6 +147,7 @@ const App: React.FC = () => {
         )}
 
       </div>
+      <Footer />
     </>
   );
 };
