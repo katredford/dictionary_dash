@@ -27,7 +27,7 @@
     
 }
 
-.keys {
+/* .keys {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,5 +40,28 @@
     cursor: pointer;
     user-select: none;
     margin: 0;
+} */
+
+.keyRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 2px;
 }
 
+.keys {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 31px;
+    height: 52px;
+    font-size: 30px;
+    border-color: rgb(46, 42, 20);
+    background-color: #e3e0cf;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+    margin: 0px;
+}
