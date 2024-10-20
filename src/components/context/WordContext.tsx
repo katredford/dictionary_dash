@@ -13,12 +13,16 @@ interface WordContextProps {
     error: string | null;
     getStoredWords: () => { id: string; word: string; skipped: boolean }[];
     getStoredDefinitions: () => { id: string; definition: string }[];
-    saveWordToLocalStorage: (word: string, skipped: boolean, definition: string, id?:string) => void;
+    gameMode: (mode: string) => void;
+    strikes: number;
+    mode:string;
+    strikeCount: (strike: number) => void;
+    saveWordToLocalStorage: (word: string, skipped: boolean, definition: string, id?: string) => void;
 }
 
 interface Definition {
     definition: string;
-    
+
 }
 
 const WordContext = createContext<WordContextProps | undefined>(undefined);
@@ -28,24 +32,36 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [currentData, setCurrentData] = useState<WordData[] | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const [mode, setMode] = useState<string>('standard');
+    const [ strikes, setStrikes] = useState<number>(0)
 
-    const randomWord = () => {
-   
-        const randomIndex = Math.floor(Math.random() * wordlist.length);
-        return wordlist[randomIndex].word
+        console.log("context strikes: ", strikes)
+
+    const gameMode = (gameMode: string) => {
+        
+        setMode(gameMode);
     };
 
+    const strikeCount = (strikeNumber: number) => {
+        setStrikes(strikeNumber);
+    };
+
+    const randomWord = () => {
+
+        const randomIndex = Math.floor(Math.random() * wordlist.length);
+        return wordlist[randomIndex].word;
+    };
 
     const getLongestDefinitions = (): Definition[] => {
         if (!currentData || currentData.length === 0) return [];
-    
+
         const longestMeaning = currentData[0]?.meanings.reduce((acc, curr) => {
             return curr.definitions.length > acc.definitions.length ? curr : acc;
         }, currentData[0]?.meanings[0]);
-    
+
         return longestMeaning?.definitions ?? [];
     };
-    
+
 
 
     const fetchNewWord = async () => {
@@ -106,7 +122,7 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const saveWordToLocalStorage = (word: string, skipped: boolean, definition: string, id?: string) => {
         const wordArray = JSON.parse(localStorage.getItem("userAnswer") || "[]");
-    
+
         if (id) {
             const index = wordArray.findIndex((item: any) => item.id === id);
             if (index !== -1) {
@@ -123,7 +139,7 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
             };
             wordArray.push(wordObject);
         }
-    
+
         localStorage.setItem("userAnswer", JSON.stringify(wordArray));
     };
 
@@ -149,6 +165,10 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
         getStoredWords,
         getStoredDefinitions,
         loading,
+        gameMode,
+        mode,
+        strikeCount,
+        strikes,
         error
     };
 

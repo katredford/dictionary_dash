@@ -2,13 +2,19 @@ import { useState, useEffect, useRef } from 'react';
 import { useWord } from './context/WordContext';
 import KeyBoard from './keyboard/KeyBoard';
 
+// interface StrikeState {
+//     strikes: number;
+//   }
 
 const Input = () => {
     const skipButtonRef = useRef<HTMLButtonElement | null>(null);
-    const { currentWord, saveWordToLocalStorage, fetchNewWord } = useWord();
+    const { currentWord, saveWordToLocalStorage, fetchNewWord, strikeCount } = useWord();
     const [typedChars, setTypedChars] = useState<string[]>([]);
     const [skipped, setSkipped] = useState<boolean>(false);
+    const [strikes, setStrikes] = useState<number>(0)
+    // let strikes: number = 0;
 
+    console.log("input strikes", strikes)
     useEffect(() => {
         setTypedChars(new Array(currentWord.length).fill(''));
         setSkipped(false);
@@ -18,7 +24,7 @@ const Input = () => {
 
     const handleKeyClick = (char: string) => {
         if (skipped && char !== 'NEXT') return;
-    
+
         setTypedChars(prevTypedChars => {
             const updatedChars = [...prevTypedChars];
             if (char === 'BACK') {
@@ -36,11 +42,18 @@ const Input = () => {
             } else if (char === 'ENTER') {
                 handleSubmit(false);
             } else if (char === 'SKIP') {
+                // strikes++
+                wordSkip()
+                // strikeCount(strikes)
                 handleSubmit(true);
                 setTypedChars(wordChars);
             }
             return updatedChars;
         });
+    };
+
+    const wordSkip = () => {
+        setStrikes((prevState) => prevState + 1); // incrementing the number
     };
 
 
@@ -74,11 +87,12 @@ const Input = () => {
         const wordObject = wordArray.find((item: any) => item.word === currentWord);
         const joinedChars = typedChars.join('');
         const isWordCorrect = joinedChars.toUpperCase() === currentWord.toUpperCase();
-    
+
         saveWordToLocalStorage(currentWord, isSkipped, wordObject?.definition || "", wordObject?.id);
-    
+
 
         if (isSkipped) {
+            // strikeCount(strikes++)
             setSkipped(true);
             setTypedChars(wordChars);
         } else if (isWordCorrect) {
@@ -89,7 +103,7 @@ const Input = () => {
             setSkipped(false);
         }
     };
-    
+
 
     useEffect(() => {
         const handleKeyPressEvent = (event: KeyboardEvent) => handleKeyPress(event);
@@ -103,7 +117,8 @@ const Input = () => {
         if (skipButtonRef.current) {
             skipButtonRef.current.blur();
         }
-    }, [skipped]); 
+        strikeCount(strikes)
+    }, [skipped]);
 
     return (
         <>
@@ -123,18 +138,18 @@ const Input = () => {
                 <KeyBoard keyClick={handleKeyClick} />
                 <div className='spKeyBox'>
                     {skipped ? (
-                        <button 
-                        className="spKeys" 
-                        onClick={fetchNewWord}
+                        <button
+                            className="spKeys"
+                            onClick={fetchNewWord}
                         >
                             NEXT
                         </button>
                     ) : (
-                        <button 
-                        ref={skipButtonRef}
-                        className="spKeys" 
-                        style={{backgroundColor: "#ff0404b3"}}
-                        onClick={() => handleKeyClick("SKIP")}
+                        <button
+                            ref={skipButtonRef}
+                            className="spKeys"
+                            style={{ backgroundColor: "#ff0404b3" }}
+                            onClick={() => handleKeyClick("SKIP")}
                         >
                             SKIP
                         </button>
