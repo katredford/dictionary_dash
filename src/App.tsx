@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useWord } from './components/context/WordContext';
 import WordDisplay from './components/WordDisplay';
 import Input from './components/Input';
