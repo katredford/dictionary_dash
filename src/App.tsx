@@ -1,23 +1,25 @@
 import React, { ChangeEvent, useState, useEffect, useRef } from 'react';
+import { useWord } from './components/context/WordContext';
 import WordDisplay from './components/WordDisplay';
 import Input from './components/Input';
 import ScoreList from './components/ScoreList';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ModeSelection from './components/ModeSelection';
 
-const App: React.FC = () => {
-
+const App = () => {
+  const { mode, strikes } = useWord();
   const [time, setTime] = useState<number>(60);
   const [isStarted, setIsStarted] = useState<boolean>(false);
   const [isRestarting, setIsRestarting] = useState<boolean>(false);
-  const [leisureMode, setLeisureMode] = useState(false);
   const [showScore, setShowScore] = useState(false);
 
   const timerRef = useRef<number | null>(null);
 
 
   useEffect(() => {
-    if (time === 0 && !leisureMode) {
+
+    if (time === 0 && mode === 'timed') {
       setIsStarted(false);
       setShowScore(true);
       if (timerRef.current) {
@@ -25,7 +27,20 @@ const App: React.FC = () => {
         timerRef.current = null;
       }
     }
-  }, [time, leisureMode]);
+  }, [time, mode]);
+
+  //if mode changes game starts over
+  useEffect(() => {
+    setIsStarted(false);
+
+  }, [mode])
+
+  useEffect(() => {
+    if (strikes === 3 && mode === 'standard') {
+      setIsStarted(false);
+      setShowScore(true);
+    }
+  }, [strikes, mode]);
 
 
   const handleTimeStart = () => {
@@ -34,7 +49,7 @@ const App: React.FC = () => {
     setIsStarted(true);
     setShowScore(false);
 
-    if (!leisureMode) {
+    if (mode === 'timed') {
       setTime(60);
 
       timerRef.current = setInterval(() => {
@@ -49,15 +64,6 @@ const App: React.FC = () => {
   };
 
 
-  const handleLeisureModeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setLeisureMode(e.target.checked);
-    if (e.target.checked && timerRef.current) {
-      // clear timer if leisure mode 
-      clearInterval(timerRef.current);
-      timerRef.current = null;
-      setTime(0)
-    }
-  };
 
   const handleFinish = () => {
     setShowScore(true);
@@ -68,31 +74,43 @@ const App: React.FC = () => {
     }
   };
 
+  const getSquare = (index: number): string => {
+    return strikes >= index ? '✖️' : '▢';
+    '▢'
+  };
+
   return (
     <>
       <div className='row column align-center'>
         <Header />
 
+        <ModeSelection />
 
-        <label className="custom-checkbox">
-          <input
-            type="checkbox"
-            checked={leisureMode}
-            onChange={handleLeisureModeChange}
-          />
-          <span className="checkmark"></span>
-          Leisure Mode
-        </label>
-
-
-        {isStarted && leisureMode && !showScore && (
+        {isStarted && mode === 'standard' && !showScore && (
           <>
-            <button 
-            className='finish spKeys' 
-            onClick={handleFinish}
-            style={{
-              backgroundColor: "rgb(46, 42, 20)",
-              color: "rgb(225, 224, 205"
+            <div className='row align-center'>
+
+            <h2 className='strikeBox'>{getSquare(1)}</h2>
+            <h2 className='strikeBox'>{getSquare(2)}</h2>
+            <h2 className='strikeBox'>{getSquare(3)}</h2>
+            
+            </div>
+
+            <WordDisplay />
+            <Input />
+
+          </>
+        )}
+
+
+        {isStarted && mode === 'endless' && !showScore && (
+          <>
+            <button
+              className='finish spKeys'
+              onClick={handleFinish}
+              style={{
+                backgroundColor: "rgb(46, 42, 20)",
+                color: "rgb(225, 224, 205"
               }}
             >
               FINISH
@@ -105,12 +123,15 @@ const App: React.FC = () => {
         )}
 
 
+
         {!isStarted && !showScore && (
 
-          <div className='startBox column'>
-            <h2>How many words can you guess in 60 seconds?</h2>
+          <div className='startBox row column align-center '>
+            <h2>How many words can you guess?</h2>
+            <h3>3 skips and its over!</h3>
             <button
               className='spKeys'
+              style={{width: '100%'}}
               onClick={handleTimeStart}
             >
               {isRestarting ? 'AGAIN' : 'START'}
@@ -119,14 +140,13 @@ const App: React.FC = () => {
 
         )}
         {/* game in progress */}
-        {isStarted && time > 0 && !leisureMode && (
+        {isStarted && time > 0 && mode === 'timed' && (
           <>
             <p className='timer'>{time}</p>
             <WordDisplay />
             <Input />
           </>
         )}
-
 
         {showScore && (
           <>

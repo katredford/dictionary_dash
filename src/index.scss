@@ -92,6 +92,8 @@ footer {
 
 //CUSTOME STYLES
 
+
+//WordDisplay
 .wordDisplay {
 
     padding: 10px;
@@ -133,21 +135,6 @@ footer {
     text-align: left;
 }
 
-.startBox {
-    margin: 12px;
-}
-
-.timer {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 30px;
-    margin: 10px;
-    background-color: rgb(46, 42, 20);
-    color: rgb(225, 224, 205);
-    padding: 10px;
-    border-radius: 5px;
-    width: 72px;
-    text-align: center;
-}
 
 .startLetter {
     font-size: 30px;
@@ -161,6 +148,7 @@ footer {
 
 }
 
+//Input
 .wordbox {
     display: flex;
     justify-content: space-between;
@@ -240,6 +228,99 @@ footer {
 }
 
 
+
+//APP
+.startBox {
+    margin: 12px;
+}
+
+.timer {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 30px;
+    margin: 10px;
+    background-color: rgb(46, 42, 20);
+    color: rgb(225, 224, 205);
+    padding: 10px;
+    border-radius: 5px;
+    width: 72px;
+    text-align: center;
+}
+
+.strikeBox {
+    font-size: 46px;
+    height: 53px;
+}
+
+//ModeSelection
+
+.modeSelect {
+    margin: 15px;
+}
+input[type="checkbox"] {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.endless::before {
+    background-color: #e3e0cf;
+    color: rgb(46, 42, 20);
+    padding: 9px 15px;
+    border-radius: 33px;
+    font-size: 32px;
+    content: "∞";
+}
+
+
+.endless--active::before {
+    background-color: rgb(46, 42, 20);
+    color: #e3e0cf;
+    padding: 9px 15px;
+    border-radius: 33px;
+    font-size: 32px;
+    content: "∞"
+}
+
+.timed::before {
+    background-color: #e3e0cf;
+    color: rgb(46, 42, 20);
+    padding: 9px 15px;
+    border-radius: 33px;
+    font-size: 32px;
+    content: "⏲";
+}
+
+.timed--active::before {
+    background-color: rgb(46, 42, 20);
+    color: #e3e0cf;
+    padding: 9px 15px;
+    border-radius: 33px;
+    font-size: 32px;
+    content: "⏲"
+}
+
+.standard::before {
+    background-color: #e3e0cf;
+    color: rgb(46, 42, 20);
+    padding: 9px 19px;
+    border-radius: 33px;
+    font-size: 32px;
+    content: "3";
+}
+
+.standard--active::before {
+    background-color: rgb(46, 42, 20);
+    color: #e3e0cf;
+    padding: 9px 19px;
+    border-radius: 33px;
+    font-size: 32px;
+    content: "3"
+}
+
 /* Hide default checkbox */
 .custom-checkbox input {
     opacity: 0;
@@ -250,7 +331,6 @@ footer {
 /* custom checkbox */
 .custom-checkbox {
     position: relative;
-    padding-left: 35px;
     cursor: pointer;
     font-size: 18px;
     margin: 5px;
