@@ -6,6 +6,7 @@ import ScoreList from './components/ScoreList';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ModeSelection from './components/ModeSelection';
+import Login from './components/Login';
 
 const App = () => {
   const { mode, strikes } = useWord();
@@ -44,7 +45,10 @@ const App = () => {
 
 
   const handleTimeStart = () => {
-    localStorage.clear();
+    console.log("Before remove:", localStorage.getItem('userAnswer'));
+localStorage.removeItem('userAnswer');
+console.log("After remove:", localStorage.getItem('userAnswer'));
+
     setIsRestarting(false);
     setIsStarted(true);
     setShowScore(false);
@@ -81,6 +85,10 @@ const App = () => {
 
   return (
     <>
+
+    {/* <Login /> */}
+
+    
       <div className='row column align-center'>
         <Header />
 
