@@ -1,4 +1,5 @@
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
+import { Friends } from './friends.js';
 import bcrypt from 'bcrypt';
 
 interface UserFields {
@@ -7,7 +8,7 @@ interface UserFields {
   password: string;
 }
 
-interface UserCreateFields extends Optional<UserFields, 'id'> {}
+interface UserCreateFields extends Optional<UserFields, 'id'> { }
 
 export class User extends Model<UserFields, UserCreateFields> implements UserFields {
   public id!: number;
@@ -22,12 +23,22 @@ export class User extends Model<UserFields, UserCreateFields> implements UserFie
     this.password = await bcrypt.hash(password, saltRounds)
   }
 
+  public async addFriend(friendId: number) {
+    const friend = await User.findByPk(friendId);
+    if (!friend) {
+      throw new Error('Friend not found');
+    }
+    await Friends.create({ userId: this.id, friendId });
+  }
 }
+
+
+
 
 export function UserProducer(sequelize: Sequelize): typeof User {
   User.init(
     {
-      id:{
+      id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,

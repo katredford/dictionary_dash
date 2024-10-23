@@ -1,10 +1,12 @@
 import express from 'express';
-import{
+import { authenticationToken } from '../../middleware/auth.js';
+import {
   getAllUsers,
   createUser,
   getOneUser,
   patchUser,
-  deleteUser
+  deleteUser,
+  addFriend
 } from '../../controllers/user_controller.js';
 
 const router = express.Router();
@@ -15,8 +17,11 @@ router.get('/:id', getOneUser);
 
 router.post('/', createUser);
 
+router.post('/friend/:friendId', authenticationToken, addFriend);
+
 router.patch('/:id', patchUser);
 
 router.delete('/:id', deleteUser);
+
 
 export { router as userRouter };
