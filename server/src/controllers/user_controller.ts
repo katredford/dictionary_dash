@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import {User} from '../models/index.js';
+import {User, Game} from '../models/index.js';
 
 export const getAllUsers = async (_req: Request, res: Response) => {
   try{
@@ -16,7 +16,10 @@ export const getOneUser = async (req: Request, res: Response) => {
     const paramsId = req.params.id;
   try{
     const user = await User.findByPk(paramsId, {
-      attributes: { exclude: ['password'] }
+      attributes: { exclude: ['password'] },
+      include: [Game]
+        
+      
     });
     if(user) {
       res.json(user)

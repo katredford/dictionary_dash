@@ -5,7 +5,7 @@ import{
   getOneUser,
   patchUser,
   deleteUser
-} from '../../controllers/user-controller.js';
+} from '../../controllers/user_controller.js';
 
 const router = express.Router();
 
