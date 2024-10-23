@@ -1,0 +1,4 @@
+
+DROP DATABASE IF EXISTS stamps_db;
+
+CREATE DATABASE stamps_db;
