@@ -4,8 +4,10 @@ interface GameFields {
   id: number;
   gameType: string;
   hintsUsed: number;
+  wordNumber: number;
   correctWords: number;
   userId: number;
+  
 }
 
 interface GameAttributes extends Optional<GameFields, 'id'> {};
@@ -14,6 +16,7 @@ export class Game extends Model<GameFields, GameAttributes> implements GameAttri
   public id!: number;
   public gameType!: string;
   public hintsUsed!: number;
+  public wordNumber!: number;
   public correctWords!: number;
   public userId!: number;
 
@@ -37,6 +40,10 @@ export function GameProducer(sequelize: Sequelize): typeof Game {
         // allowNull: false,
       },
       hintsUsed: {
+        type: DataTypes.INTEGER,
+        // allowNull: false,
+      },
+      wordNumber: {
         type: DataTypes.INTEGER,
         // allowNull: false,
       },

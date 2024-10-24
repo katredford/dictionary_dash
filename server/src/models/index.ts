@@ -28,4 +28,5 @@ User.belongsToMany(User, {
   otherKey: 'friendId'
 });
 Game.belongsTo(User, { foreignKey: 'userId', as: 'assignedUser' })
+
 export { sequelize, User, Game, FriendShip };

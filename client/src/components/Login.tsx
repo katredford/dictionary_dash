@@ -1,7 +1,8 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 
 import Auth from '../auth/auth';
-import { login } from "../components/context/authAPI";
+import { login } from "./context/userApi/authAPI";
+import { signUpFetch } from './context/userApi/userAPI'
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -9,8 +10,10 @@ const Login = () => {
     password: ''
   });
 
+  const [signUp, setSignUp] = useState<boolean>(false)
+
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    // e.preventDefault()
+    e.preventDefault()
     const { name, value } = e.target;
     setLoginData({
       ...loginData,
@@ -18,12 +21,22 @@ const Login = () => {
     });
   };
 
+  const signUpChange = () => {
+    setSignUp(true)
+  }
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const data = await login(loginData);
-      console.log(data)
-      Auth.login(data.token);
+      if(signUp) {
+        const data = await signUpFetch(loginData);
+        return data;
+      }else {
+
+        const data = await login(loginData);
+        console.log(data)
+        Auth.login(data.token);
+      }
   
     } catch (err) {
       console.error('Failed to login', err);
@@ -31,6 +44,8 @@ const Login = () => {
   };
 
   return (
+    <>
+    
     <div className='form-container'>
       <form className='form' onSubmit={handleSubmit}>
         <h1>Login</h1>
@@ -48,9 +63,15 @@ const Login = () => {
           value={loginData.password || ''}
           onChange={handleChange}
         />
-        <button type='submit'>Login</button>
+        <button type='submit'>submit</button>
       </form>
+        <button
+        onClick={signUpChange}
+        >
+          sign up
+        </button>
     </div>
+    </>
     
   )
 };

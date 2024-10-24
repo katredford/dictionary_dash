@@ -6,7 +6,7 @@ import ScoreList from './components/ScoreList';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ModeSelection from './components/ModeSelection';
-import Login from './components/Login';
+// import AddFriend from './components/AddFriend';
 
 const App = () => {
   const { mode, strikes } = useWord();
@@ -86,13 +86,13 @@ console.log("After remove:", localStorage.getItem('userAnswer'));
   return (
     <>
 
-    {/* <Login /> */}
+{/* <AddFriend /> */}
 
     
       <div className='row column align-center'>
         <Header />
 
-        <ModeSelection />
+        {!isStarted && <ModeSelection />}
 
         {isStarted && mode === 'standard' && !showScore && (
           <>

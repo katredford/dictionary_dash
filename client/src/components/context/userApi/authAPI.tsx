@@ -1,4 +1,4 @@
-import { UserLogin } from "./types";
+import { UserLogin } from "../types";
 
 const login = async (userInfo: UserLogin) => {
   try {

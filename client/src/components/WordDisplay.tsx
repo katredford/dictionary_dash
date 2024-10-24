@@ -12,7 +12,22 @@ const WordDisplay: React.FC = () => {
     } = useWord();
     const [hintIndex, setHintIndex] = useState<number>(1);
 
+    const [hintNumber, setHintNumber] = useState<number>(0);
 
+
+    console.log("word display", hintNumber);
+
+    const incrementHint = () => {
+        setHintNumber(prevState => {
+            return prevState + 1;
+        })
+
+    }
+
+
+    useEffect(() => {
+        localStorage.setItem('hintsUsed', hintNumber.toString())
+    }, [hintNumber])
 
     useEffect(() => {
         if (currentData) {
@@ -27,6 +42,7 @@ const WordDisplay: React.FC = () => {
 
     useEffect(() => {
         setHintIndex(1);
+
     }, [currentWord])
 
     if (loading) {
@@ -50,7 +66,7 @@ const WordDisplay: React.FC = () => {
 
 
     const handleHintClick = () => {
-
+        incrementHint()
         if (hintIndex < longestDefinitions.length) {
             setHintIndex(hintIndex + 1);
         }
@@ -60,7 +76,7 @@ const WordDisplay: React.FC = () => {
     return (
         <>
             <div className='wordDisplay column align-center'>
-            
+
                 <p className='definition'>
                     <span style={{ fontWeight: 'bold' }}>Definition:</span>
                     <br />

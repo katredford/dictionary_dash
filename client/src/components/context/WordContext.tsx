@@ -84,6 +84,7 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     meanings: response.data[0].meanings,
                     license: response.data[0].license,
                     sourceUrls: response.data[0].sourceUrls,
+                 
                 };
 
                 return wordData;
@@ -120,7 +121,7 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
         await retryFetch();
     };
 
-    const saveWordToLocalStorage = (word: string, skipped: boolean, definition: string, id?: string) => {
+    const saveWordToLocalStorage = (word: string, skipped: boolean, definition: string, id?: string,  ) => {
         const wordArray = JSON.parse(localStorage.getItem("userAnswer") || "[]");
 
         if (id) {
@@ -136,11 +137,12 @@ export const WordProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 word,
                 skipped,
                 definition,
+                
             };
             wordArray.push(wordObject);
         }
 
-        localStorage.setItem("userAnswer", JSON.stringify(wordArray));
+        localStorage.setItem("userAnswer", JSON.stringify(wordArray), );
     };
 
 

@@ -2,9 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useWord } from './context/WordContext';
 import KeyBoard from './keyboard/KeyBoard';
 
-// interface StrikeState {
-//     strikes: number;
-//   }
 
 const Input = () => {
     const skipButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -12,9 +9,9 @@ const Input = () => {
     const [typedChars, setTypedChars] = useState<string[]>([]);
     const [skipped, setSkipped] = useState<boolean>(false);
     const [strikes, setStrikes] = useState<number>(0)
-    // let strikes: number = 0;
 
-    console.log("input strikes", strikes)
+
+
     useEffect(() => {
         setTypedChars(new Array(currentWord.length).fill(''));
         setSkipped(false);
