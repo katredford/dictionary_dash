@@ -29,6 +29,7 @@ export interface WordData {
     meanings: Meaning[];
     license: License;
     sourceUrls: string[];
+  
 }
 
 export interface UserLogin {
@@ -37,6 +38,13 @@ export interface UserLogin {
 }
 
 export interface UserData {
-    id: number | null;
+    id?: number | null;
     username: string | null;
+    password: number | null;
+
+}
+
+export interface GameData {
+    // words?: WordData[];
+    correctWords: number;
 }

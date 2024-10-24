@@ -4,6 +4,7 @@ import auth from '../auth/auth';
 
 const Header = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
 
     const loginCheck = () => {
         if (auth.loggedIn()) {
@@ -14,9 +15,16 @@ const Header = () => {
     useEffect(() => {
         console.log(loggedIn);
         loginCheck();
-    }, [loginCheck])
+    }, [])
 
 
+    const openModal = () => {
+        setModalVisible(true); // Open modal
+    };
+
+    const closeModal = () => {
+        setModalVisible(false); // Close modal
+    };
     return (
         <>
             <header className="column align-center">
@@ -33,7 +41,23 @@ const Header = () => {
 
                 {
                     !loggedIn ? (
-                        <Login />
+                        <div>
+
+                        <button 
+                        id='modalBUtotn'
+                        onClick={openModal}
+                        >
+                            Login
+                        </button>
+                        {modalVisible && ( // Conditional rendering of the modal
+                                <div className="modal">
+                                    <div className="modal-content">
+                                        <span className="close" onClick={closeModal}>&times;</span> {/* Close button */}
+                                        <Login />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     ) : (
                         <li className='nav-item'>
                             <button type='button' onClick={() => {
