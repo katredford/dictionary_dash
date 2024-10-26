@@ -1,4 +1,4 @@
 
-DROP DATABASE IF EXISTS stamps_db;
+DROP DATABASE IF EXISTS dictionary_db;
 
-CREATE DATABASE stamps_db;
+CREATE DATABASE dictionary_db;
